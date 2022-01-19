@@ -26,20 +26,20 @@ const StyledTitle = styled.Text`
   font-family: OpenSans-Regular;
   position: absolute;
 `;
-export default function Splash1() {
+export default function Splash1({navigation}) {
   return (
     <ImageBackground
       source={BackgroundImage}
       style={{flex: 1, resizeMode: 'cover', backgroundColor: 'transparent'}}>
       <StyledView>
         <StyledTitle>Welcome To LandiFit</StyledTitle>
-        <StyledSkipText onPress={() => alert('31')}>Skip</StyledSkipText>
+        <StyledSkipText onPress={() => navigation.navigate('Sign')}>Skip</StyledSkipText>
         <View style={styles.circlesView}>
           <View style={styles.filledCircle}></View>
           <View style={styles.emptyCircle}></View>
           <View style={styles.emptyCircle}></View>
         </View>
-        <StyledNextText>Next</StyledNextText>
+        <StyledNextText >Next</StyledNextText>
       </StyledView>
     </ImageBackground>
   );

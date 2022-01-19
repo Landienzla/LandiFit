@@ -54,6 +54,8 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>OpenSans-Regular.ttf</string>
+		<string>Faustina-Regular.ttf</string>
+		<string>Faustina-SemiBold.ttf</string>
 	</array>
 </dict>
 </plist>
