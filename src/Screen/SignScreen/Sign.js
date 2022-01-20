@@ -57,6 +57,14 @@ const StyledLoginText = styled.Text`
   top: 600px;
   left: 138px;
 `;
+const Line = styled.View`
+  background-color: white;
+  width: 120px;
+  height: 2px;
+  position: absolute;
+  top: 370px;
+  left: 200px;
+`;
 export default function Sign({navigation}) {
   return (
     <ImageBackground
@@ -65,26 +73,29 @@ export default function Sign({navigation}) {
       <View>
         <Text onPress={() => navigation.navigate('Splash1')}>Go Back</Text>
         <StyledTitle>LandiFit</StyledTitle>
-        <View style={styles.line}></View>
+        {/* <View style={styles.line}></View> */}
+        <Line/>
         <StyledText>
           Lorem Ipsum is simply dummy text of the printing and <StyledBoldText>typesetting</StyledBoldText>
         </StyledText>
         <StyledButton>
           <StyledSignText>SIGN UP</StyledSignText>
         </StyledButton>
-        <StyledLoginText>Log In With Account</StyledLoginText>
+        <StyledLoginText onPress={()=>{
+          navigation.navigate('SignIn')
+        }}>Log In With Account</StyledLoginText>
       </View>
     </ImageBackground>
   );
 }
 
-const styles = StyleSheet.create({
-  line: {
-    backgroundColor: 'white',
-    width: 120,
-    height: 2,
-    position: 'absolute',
-    top: 370,
-    left: 200,
-  },
-});
+// const styles = StyleSheet.create({
+//   line: {
+//     backgroundColor: 'white',
+//     width: 120,
+//     height: 2,
+//     position: 'absolute',
+//     top: 370,
+//     left: 200,
+//   },
+// });

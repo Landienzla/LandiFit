@@ -15,6 +15,7 @@
 		A2CD87743A804766ADFC8235 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F37EBCFEDFE14026B517536F /* OpenSans-Regular.ttf */; };
 		3DFEE17D91764371A66C4362 /* Faustina-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3078D93A02654C47AD061DF3 /* Faustina-Regular.ttf */; };
 		238A84DED74D4CBFA20CD660 /* Faustina-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A57513B6F374C08AB0DC7BB /* Faustina-SemiBold.ttf */; };
+		E005259F7DA74A88889735CF /* Faustina-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C197CA0498442388F837006 /* Faustina-Medium.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		F37EBCFEDFE14026B517536F /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; name = "OpenSans-Regular.ttf"; path = "../assets/fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		3078D93A02654C47AD061DF3 /* Faustina-Regular.ttf */ = {isa = PBXFileReference; name = "Faustina-Regular.ttf"; path = "../assets/fonts/Faustina-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		7A57513B6F374C08AB0DC7BB /* Faustina-SemiBold.ttf */ = {isa = PBXFileReference; name = "Faustina-SemiBold.ttf"; path = "../assets/fonts/Faustina-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6C197CA0498442388F837006 /* Faustina-Medium.ttf */ = {isa = PBXFileReference; name = "Faustina-Medium.ttf"; path = "../assets/fonts/Faustina-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 				F37EBCFEDFE14026B517536F /* OpenSans-Regular.ttf */,
 				3078D93A02654C47AD061DF3 /* Faustina-Regular.ttf */,
 				7A57513B6F374C08AB0DC7BB /* Faustina-SemiBold.ttf */,
+				6C197CA0498442388F837006 /* Faustina-Medium.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 				A2CD87743A804766ADFC8235 /* OpenSans-Regular.ttf in Resources */,
 				3DFEE17D91764371A66C4362 /* Faustina-Regular.ttf in Resources */,
 				238A84DED74D4CBFA20CD660 /* Faustina-SemiBold.ttf in Resources */,
+				E005259F7DA74A88889735CF /* Faustina-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
