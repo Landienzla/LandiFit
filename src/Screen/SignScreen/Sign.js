@@ -78,7 +78,7 @@ export default function Sign({navigation}) {
         <StyledText>
           Lorem Ipsum is simply dummy text of the printing and <StyledBoldText>typesetting</StyledBoldText>
         </StyledText>
-        <StyledButton>
+        <StyledButton onPress={()=>navigation.navigate("SignUp")}>
           <StyledSignText>SIGN UP</StyledSignText>
         </StyledButton>
         <StyledLoginText onPress={()=>{

@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
+import CheckBox from '@react-native-community/checkbox';
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 const StyledBackground = styled.SafeAreaView`
@@ -40,20 +41,11 @@ const Line = styled.View`
   top: 80px;
   left: 250px;
 `;
-const StyledWelcomeText = styled.Text`
-  color: black;
-  font-size: 36px;
-  font-family: Faustina-Medium;
-  top: 130px;
-  left: 128px;
-  position: absolute;
-  letter-spacing: 2px;
-`;
-const StyledSignInText = styled.Text`
+const StyledCreateAccountText = styled.Text`
   color: #777777;
   font-size: 24px;
   font-family: Faustina-Medium;
-  top: 180px;
+  top: 160px;
   left: 80px;
   position: absolute;
   letter-spacing: 1px;
@@ -68,12 +60,18 @@ const StyledTextInput = styled.TextInput`
   font-size: 20px;
   left: 10px;
 `;
-const StyledForgotPasswordText = styled.Text`
+const StyledCheckBoxView = styled.View`
+  top: 388px;
+`;
+const StyledReadAgreeText = styled.Text`
   position: absolute;
   font-family: Faustina-Regular;
   font-size: 18px;
-  top: 390px;
-  left: 250px;
+  top: 392px;
+  left: 30px;
+`;
+const StyledTermsText = styled.Text`
+  color: #2264af;
 `;
 const StyledButton = styled.TouchableOpacity`
   background-color: #c12323;
@@ -113,12 +111,13 @@ const StyledSignupText = styled.Text`
   color: #777777;
   top: 620px;
   left: 80px;
+  position: absolute;
 `;
 const StyledRedSignupText = styled.Text`
   color: #c12323;
   font-family: Faustina-Medium;
 `;
-export default function SignIn({navigation}) {
+export default function SignUp({navigation}) {
   return (
     <StyledBackground>
       <KeyboardAvoidingView style={{flex: 1}} behavior="position">
@@ -126,8 +125,15 @@ export default function SignIn({navigation}) {
           <Landi>Landi</Landi> <Fit>Fit</Fit>
         </StyledLandiFitText>
         <Line />
-        <StyledWelcomeText>Welcome!</StyledWelcomeText>
-        <StyledSignInText>Sign into Your Account</StyledSignInText>
+        <StyledCreateAccountText>Create Your Account</StyledCreateAccountText>
+        <StyledTextInput
+          keyboardType={'email-address'}
+          clearButtonMode={'always'}
+          textContentType={'emailAddress'}
+          placeholderTextColor={'#777777'}
+          placeholder="Username*"
+          style={{top: 220}}
+        />
         <StyledTextInput
           keyboardType={'email-address'}
           clearButtonMode={'always'}
@@ -144,9 +150,16 @@ export default function SignIn({navigation}) {
           placeholder="Password*"
           style={{top: 340}}
         />
-        <StyledForgotPasswordText>Forgot Password?</StyledForgotPasswordText>
+        <StyledCheckBoxView>
+          <CheckBox />
+        </StyledCheckBoxView>
+
+        <StyledReadAgreeText>
+          I Read and agree to{' '}
+          <StyledTermsText>Terms & Conditions</StyledTermsText>
+        </StyledReadAgreeText>
         <StyledButton>
-          <StyledLoginText>LOGIN</StyledLoginText>
+          <StyledLoginText>SIGNUP</StyledLoginText>
         </StyledButton>
         <StyledOrText>OR</StyledOrText>
         <StyledSocialMediaButton
@@ -155,9 +168,9 @@ export default function SignIn({navigation}) {
         <StyledSocialMediaButton
           style={{left: 220, backgroundColor: '#00A4F9'}}
         />
-        <StyledSignupText onPress={()=>navigation.navigate('SignUp')}>
-          Don't have an account?
-          <StyledRedSignupText>Signup</StyledRedSignupText>
+        <StyledSignupText onPress={() => navigation.navigate('SignUp')}>
+          Already have an account?
+          <StyledRedSignupText>Login</StyledRedSignupText>
         </StyledSignupText>
       </KeyboardAvoidingView>
     </StyledBackground>
