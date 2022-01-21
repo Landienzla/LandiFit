@@ -4,16 +4,18 @@ import {
   ImageBackground,
   TextInput,
   KeyboardAvoidingView,
-  SafeAreaView
+  SafeAreaView,
+  TouchableOpacity,
 } from 'react-native';
-import React,{useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 const StyledBackground = styled.SafeAreaView`
   background-color: #f8f8f8;
   flex: 1;
 `;
 const StyledLandiFitText = styled.Text`
-  top: 100px;
+  position: absolute;
+  top: 10px;
   left: 80px;
 `;
 const Landi = styled.Text`
@@ -35,14 +37,14 @@ const Line = styled.View`
   width: 80px;
   height: 2px;
   position: absolute;
-  top: 170px;
+  top: 80px;
   left: 250px;
 `;
 const StyledWelcomeText = styled.Text`
   color: black;
   font-size: 36px;
   font-family: Faustina-Medium;
-  top: 250px;
+  top: 130px;
   left: 128px;
   position: absolute;
   letter-spacing: 2px;
@@ -51,28 +53,75 @@ const StyledSignInText = styled.Text`
   color: #777777;
   font-size: 24px;
   font-family: Faustina-Medium;
-  top: 300px;
+  top: 180px;
   left: 80px;
   position: absolute;
   letter-spacing: 1px;
 `;
 const StyledTextInput = styled.TextInput`
-position: absolute;
-font-family: Faustina-Medium;
-borderBottomWidth: 2px
-width: 380px;
-height: 48px;
-borderColor: #C6C6C6;
-font-size: 20px;
-left: 10px;
+  position: absolute;
+  font-family: Faustina-Medium;
+  border-bottom-width: 2px;
+  width: 380px;
+  height: 48px;
+  border-color: #c6c6c6;
+  font-size: 20px;
+  left: 10px;
+`;
+const StyledForgotPasswordText = styled.Text`
+  position: absolute;
+  font-family: Faustina-Regular;
+  font-size: 18px;
+  top: 390px;
+  left: 250px;
+`;
+const StyledButton = styled.TouchableOpacity`
+  background-color: #c12323;
+  width: 390px;
+  height: 60px;
+  position: absolute;
+  top: 430px;
+  left: 10px;
+  border-radius: 5px;
+  align-items: center;
+`;
+const StyledLoginText = styled.Text`
+  color: #f8f8f8;
+  font-family: Faustina-Regular;
+  font-size: 24px;
+  top: 14px;
+  letter-spacing: 2px;
+`;
+const StyledOrText = styled.Text`
+  position: absolute;
+  font-family: Faustina-Medium;
+  top: 500px;
+  font-size: 23px;
+  left: 190px;
+`;
+const StyledSocialMediaButton = styled.TouchableOpacity`
+  width: 90px;
+  height: 50px;
+  position: absolute;
+  top: 550px;
+  border-radius: 5px;
+  align-items: center;
+`;
+const StyledSignupText = styled.Text`
+  font-family: Faustina-Regular;
+  font-size: 18px;
+  color: #777777;
+  top: 620px;
+  left: 80px;
+`;
+const StyledRedSignupText = styled.Text`
+  color: #c12323;
+  font-family: Faustina-Medium;
 `;
 export default function SignIn({navigation}) {
-  const [isKeyboardOn,setKeyboardStatus] = useState(false)
-
-  
   return (
-      <StyledBackground>
-        <KeyboardAvoidingView style={{flex:1}} behavior='position'>
+    <StyledBackground>
+      <KeyboardAvoidingView style={{flex: 1}} behavior="position">
         <StyledLandiFitText>
           <Landi>Landi</Landi> <Fit>Fit</Fit>
         </StyledLandiFitText>
@@ -85,22 +134,32 @@ export default function SignIn({navigation}) {
           textContentType={'emailAddress'}
           placeholderTextColor={'#777777'}
           placeholder="Email Id*"
-          style={{top: 400}}
+          style={{top: 280}}
         />
         <StyledTextInput
-        onPressIn={()=>{
-        setKeyboardStatus(true)
-        }}
-        onPressOut={()=>{
-          setKeyboardStatus(false)
-        }}
           secureTextEntry={true}
           clearButtonMode={'always'}
           textContentType={'password'}
           placeholderTextColor={'#777777'}
           placeholder="Password*"
-          style={{top: 460}}
-        /></KeyboardAvoidingView>
-      </StyledBackground>
+          style={{top: 340}}
+        />
+        <StyledForgotPasswordText>Forgot Password?</StyledForgotPasswordText>
+        <StyledButton>
+          <StyledLoginText>LOGIN</StyledLoginText>
+        </StyledButton>
+        <StyledOrText>OR</StyledOrText>
+        <StyledSocialMediaButton
+          style={{left: 100, backgroundColor: '#dedede'}}
+        />
+        <StyledSocialMediaButton
+          style={{left: 220, backgroundColor: '#00A4F9'}}
+        />
+        <StyledSignupText>
+          Don't have an account?
+          <StyledRedSignupText>Signup</StyledRedSignupText>
+        </StyledSignupText>
+      </KeyboardAvoidingView>
+    </StyledBackground>
   );
 }
