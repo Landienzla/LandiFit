@@ -5,12 +5,13 @@ import Splash1 from './src/Screen/SplashScreen/Splash1';
 import Sign from './src/Screen/SignScreen/Sign';
 import SignIn from './src/Screen/SignInScreen/SignIn';
 import SignUp from './src/Screen/SignUpScreen/SignUp';
+import Genders from './src/Screen/GendersScreen/Genders';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='SignUp'
+      <Stack.Navigator initialRouteName='Genders'
         screenOptions={{
           headerShown: false,
         }}>
@@ -18,6 +19,7 @@ export default function App() {
         <Stack.Screen name="Sign" component={Sign} />
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="Genders" component={Genders} />
       </Stack.Navigator>
     </NavigationContainer>
   );
