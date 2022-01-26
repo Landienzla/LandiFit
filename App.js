@@ -6,12 +6,13 @@ import Sign from './src/Screen/SignScreen/Sign';
 import SignIn from './src/Screen/SignInScreen/SignIn';
 import SignUp from './src/Screen/SignUpScreen/SignUp';
 import Genders from './src/Screen/GendersScreen/Genders';
+import Focus from './src/Screen/FocusScreen/Focus';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Genders'
+      <Stack.Navigator initialRouteName='Focus'
         screenOptions={{
           headerShown: false,
         }}>
@@ -20,6 +21,7 @@ export default function App() {
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="Genders" component={Genders} />
+        <Stack.Screen name="Focus" component={Focus}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
