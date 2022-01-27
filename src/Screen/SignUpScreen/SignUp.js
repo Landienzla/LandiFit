@@ -158,7 +158,7 @@ export default function SignUp({navigation}) {
           I Read and agree to{' '}
           <StyledTermsText>Terms & Conditions</StyledTermsText>
         </StyledReadAgreeText>
-        <StyledButton>
+        <StyledButton onPress={() => navigation.navigate('Genders')}>
           <StyledLoginText>SIGNUP</StyledLoginText>
         </StyledButton>
         <StyledOrText>OR</StyledOrText>
@@ -168,7 +168,7 @@ export default function SignUp({navigation}) {
         <StyledSocialMediaButton
           style={{left: 220, backgroundColor: '#00A4F9'}}
         />
-        <StyledSignupText onPress={() => navigation.navigate('SignUp')}>
+        <StyledSignupText onPress={() => navigation.navigate('SignIn')}>
           Already have an account?
           <StyledRedSignupText>Login</StyledRedSignupText>
         </StyledSignupText>

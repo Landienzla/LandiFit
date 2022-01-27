@@ -145,7 +145,7 @@ export default function SignIn({navigation}) {
           style={{top: 340}}
         />
         <StyledForgotPasswordText>Forgot Password?</StyledForgotPasswordText>
-        <StyledButton>
+        <StyledButton onPress={() => navigation.navigate('Genders')}>
           <StyledLoginText>LOGIN</StyledLoginText>
         </StyledButton>
         <StyledOrText>OR</StyledOrText>

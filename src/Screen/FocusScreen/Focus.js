@@ -124,7 +124,7 @@ export default function Focus({navigation}) {
         <StyledFocusText>Improve Overall Fitness</StyledFocusText>
         <EmptyCircle />
       </StyledFocusView>
-      <StyledButton>
+      <StyledButton onPress={() => navigation.navigate('Splash1')}>
         <StyledGetStartedText>Get Started</StyledGetStartedText>
       </StyledButton>
     </StyledBackground>

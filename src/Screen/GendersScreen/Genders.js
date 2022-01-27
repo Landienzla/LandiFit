@@ -80,7 +80,7 @@ const StyledBetterExpText = styled.Text`
   width: 245px;
   text-align: center;
 `;
-export default function Genders() {
+export default function Genders({navigation}) {
   const [selectedGender, setSelectedGender] = useState();
   const genderHandler = e => {
     const {nativeID} = e._dispatchInstances.pendingProps;
@@ -120,7 +120,7 @@ export default function Genders() {
           }}
         />
       </StyledGenderView>
-      <StyledButton>
+      <StyledButton onPress={()=>{navigation.navigate('Focus')}}>
         <StyledNextText>Next</StyledNextText>
       </StyledButton>
       <StyledBetterExpText>
