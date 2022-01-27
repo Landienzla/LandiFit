@@ -11,93 +11,75 @@ import SignUp from './src/Screen/SignUpScreen/SignUp';
 import Genders from './src/Screen/GendersScreen/Genders';
 import Focus from './src/Screen/FocusScreen/Focus';
 import Home from './src/Screen/HomeScreen/Home';
+import Notification from './src/Screen/NotificationsScreen/Notification'
+import Profile from './src/Screen/ProfileScreen/Profile'
+import Messages from './src/Screen/MessagesScreen/Messages'
 import {Button, Text, View, ImageBackground, Image} from 'react-native';
 import sideBarImage from './src/images/sideBar.png';
 import {createDrawerNavigator} from '@react-navigation/drawer';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {LogBox} from 'react-native';
+
+LogBox.ignoreLogs([
+  "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
+]);
 
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
-function DrawNav() {
+const Tab = createBottomTabNavigator();
+export function HomeTabs() {
   return (
-    <Drawer.Navigator screenOptions={{
-      drawerInactiveBackgroundColor:"#FFFFFF",
-      drawerActiveTintColor: "#000",
-      drawerActiveBackgroundColor: "#FFFFFF",
-      drawerStyle:{
-        backgroundColor: "#c12323"
-      },
-      headerStyle:{
-        backgroundColor: "#c12323",
-      },
-      headerTitleStyle:{
-        color:"#FFFFFF",
-        fontFamily: "Faustina-Medium",
-        textAlign: "center"
-      },
-
+    <Tab.Navigator screenOptions={{
+      tabBarActiveTintColor: "#c12323"
     }}>
-      <Drawer.Screen name="Home" component={Home} />
-      <Drawer.Screen name="About" component={Splash1}/>
-      <Drawer.Screen name="Exercises" component={Sign}/>
-      <Drawer.Screen name="Contact" component={SignIn}/>
-      <Drawer.Screen name="More" component={SignUp}/>
-      {/* <Drawer.Screen name="Article" component={Article} /> */}
-    </Drawer.Navigator>
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Notification" component={Notification} />
+      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Messages" component={Messages} />
+    </Tab.Navigator>
   );
 }
-export default function App() {
+export default function App({route}) {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="DrawNav"
-        // screenOptions={{
-        //   headerShown: true,
-        // }}
-      >
-        <Stack.Screen
-          options={headerOptions.preventHeader}
+      <Drawer.Navigator
+        initialRouteName={'Splash1'}
+        screenOptions={{
+          drawerInactiveBackgroundColor: '#FFFFFF',
+          drawerActiveTintColor: '#000',
+          drawerActiveBackgroundColor: '#FFFFFF',
+          drawerStyle: {
+            backgroundColor: '#c12323',
+          },
+          headerStyle: {
+            backgroundColor: '#c12323',
+          },
+          headerTitleStyle: {
+            color: '#FFFFFF',
+            fontFamily: 'Faustina-Medium',
+            textAlign: 'center',
+          },
+        }}>
+        <Drawer.Screen options={screenOptions.allow} name="HomeTabs" component={HomeTabs} />
+        <Drawer.Screen
+          options={screenOptions.prevent}
           name="Splash1"
           component={Splash1}
         />
-        <Stack.Screen
-          options={headerOptions.preventHeader}
-          name="Sign"
-          component={Sign}
-        />
-        <Stack.Screen
-          options={headerOptions.preventHeader}
-          name="SignIn"
-          component={SignIn}
-        />
-        <Stack.Screen
-          options={headerOptions.preventHeader}
-          name="SignUp"
-          component={SignUp}
-        />
-        <Stack.Screen
-          options={headerOptions.preventHeader}
-          name="Genders"
-          component={Genders}
-        />
-        <Stack.Screen
-          options={headerOptions.preventHeader}
-          name="Focus"
-          component={Focus}
-        />
-        <Stack.Screen
-        options={headerOptions.preventHeader}
-          name="DrawNav"
-          component={DrawNav}
-        />
-      </Stack.Navigator>
+        <Drawer.Screen options={screenOptions.prevent}name="Sign" component={Sign} />
+        <Drawer.Screen options={screenOptions.prevent}name="SignIn" component={SignIn} />
+        <Drawer.Screen options={screenOptions.prevent}name="SignUp" component={SignUp} />
+        <Drawer.Screen options={screenOptions.prevent}name="Genders" component={Genders} />
+        <Drawer.Screen options={screenOptions.prevent}name="Focus" component={Focus} />
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 }
-const headerOptions = {
-  allowHeader: {
-    headerShown: true,
+const screenOptions = {
+  prevent: {
+    swipeEnabled: false, headerShown: false
   },
-  preventHeader: {
-    headerShown: false,
+  allow: {
+    swipeEnabled: true, headerShown: true
   },
 };

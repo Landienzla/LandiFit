@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import styled from 'styled-components';
+import {TabNav} from '../../../App';
 const StyledBackground = styled.SafeAreaView`
   background-color: #f8f8f8;
   flex: 1;
@@ -76,7 +77,11 @@ const StyledTrainingItemDescription = styled.Text`
   margin-top: 10px;
   font-size: 15px;
 `;
-export default function Home() {
+export default function Home({navigation}) {
+  navigation.setOptions({
+    headerShown: true,
+    swipeEnabled:true
+  })
   const workoutMockData = [
     {
       id: 1,
@@ -172,37 +177,39 @@ export default function Home() {
     },
   ];
   return (
-    <StyledBackground>
-      <StyledWorkoutTitle>Workout Exercises</StyledWorkoutTitle>
-      <StyledWorkoutFlatList
-        horizontal
-        data={workoutMockData}
-        renderItem={({item}) => (
-          <StyledWorkoutView>
-            <ImageBackground
-              source={item.image}
-              resizeMode="cover"
-              style={{flex: 1}}>
-              <StyledWorkOutItemTitle>{item.title}</StyledWorkOutItemTitle>
-            </ImageBackground>
-          </StyledWorkoutView>
-        )}
-      />
-      <StyledTrainingTitle>Training Plan</StyledTrainingTitle>
-      <StyledTrainingFlatList
-        data={trainingMockData}
-        renderItem={({item}) => (
-          <StyledTrainingView>
-            <StyledTrainingImage source={item.image} />
-            <StyledTrainingItemTitle>{item.title}</StyledTrainingItemTitle>
-            <StyledTrainingItemDescription>
-              {item.description}
-            </StyledTrainingItemDescription>
-          </StyledTrainingView>
-        )}
-        numColumns={2}
-        keyExtractor={item => item.id} 
-      />
-    </StyledBackground>
+    // <TabNav>
+      <StyledBackground>
+        <StyledWorkoutTitle>Workout Exercises</StyledWorkoutTitle>
+        <StyledWorkoutFlatList
+          horizontal
+          data={workoutMockData}
+          renderItem={({item}) => (
+            <StyledWorkoutView>
+              <ImageBackground
+                source={item.image}
+                resizeMode="cover"
+                style={{flex: 1}}>
+                <StyledWorkOutItemTitle>{item.title}</StyledWorkOutItemTitle>
+              </ImageBackground>
+            </StyledWorkoutView>
+          )}
+        />
+        <StyledTrainingTitle>Training Plan</StyledTrainingTitle>
+        <StyledTrainingFlatList
+          data={trainingMockData}
+          renderItem={({item}) => (
+            <StyledTrainingView>
+              <StyledTrainingImage source={item.image} />
+              <StyledTrainingItemTitle>{item.title}</StyledTrainingItemTitle>
+              <StyledTrainingItemDescription>
+                {item.description}
+              </StyledTrainingItemDescription>
+            </StyledTrainingView>
+          )}
+          numColumns={2}
+          keyExtractor={item => item.id}
+        />
+      </StyledBackground>
+    // </TabNav>
   );
 }
