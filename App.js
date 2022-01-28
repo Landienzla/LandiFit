@@ -19,6 +19,10 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {LogBox} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
+import About from './src/Screen/AboutScreen/About';
+import Exercises from './src/Screen/ExercisesScreen/Exercises';
+import Contact from './src/Screen/ContactScreen/Contact';
+import More from './src/Screen/MoreScreen/More';
 
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
@@ -36,7 +40,7 @@ function getHeaderTitle(route) {
     case 'Profile':
       return 'Profile';
     case 'Messages':
-      return "Messages"
+      return 'Messages';
   }
 }
 export function HomeTabs() {
@@ -121,39 +125,26 @@ export default function App({route}) {
             headerTitle: getHeaderTitle(route),
             swipeEnabled: true,
             headerShown: true,
+            drawerLabel: 'Home',
           })}
           name="HomeTabs"
           component={HomeTabs}
         />
         <Drawer.Screen
-          options={screenOptions.prevent}
-          name="Splash1"
-          component={Splash1}
+          name="About"
+          component={About}
         />
         <Drawer.Screen
-          options={screenOptions.prevent}
-          name="Sign"
-          component={Sign}
+          name="Exercises"
+          component={Exercises}
         />
         <Drawer.Screen
-          options={screenOptions.prevent}
-          name="SignIn"
-          component={SignIn}
+          name="Contact"
+          component={Contact}
         />
         <Drawer.Screen
-          options={screenOptions.prevent}
-          name="SignUp"
-          component={SignUp}
-        />
-        <Drawer.Screen
-          options={screenOptions.prevent}
-          name="Genders"
-          component={Genders}
-        />
-        <Drawer.Screen
-          options={screenOptions.prevent}
-          name="Focus"
-          component={Focus}
+          name="More"
+          component={More}
         />
       </Drawer.Navigator>
     </NavigationContainer>
