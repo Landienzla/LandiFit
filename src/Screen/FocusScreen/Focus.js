@@ -124,7 +124,7 @@ export default function Focus({navigation}) {
         <StyledFocusText>Improve Overall Fitness</StyledFocusText>
         <EmptyCircle />
       </StyledFocusView>
-      <StyledButton onPress={() => navigation.navigate('HomeTabs')}>
+      <StyledButton onPress={() => navigation.navigate('HomeStack')}>
         <StyledGetStartedText>Get Started</StyledGetStartedText>
       </StyledButton>
     </StyledBackground>
