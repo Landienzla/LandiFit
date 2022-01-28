@@ -39,7 +39,7 @@ function getHeaderTitle(route) {
     case 'Notification':
       return 'Notifications';
     case 'Profile':
-      return 'Profile';
+      return '';
     case 'Messages':
       return 'Messages';
   }
@@ -122,7 +122,20 @@ function HomeStack() {
       }}>
       <Drawer.Screen
         options={({route}) => ({
-          headerTitle: getHeaderTitle(route),
+          headerTitle: props => (
+            <View style={{flex: 0, flexDirection: 'row', alignItems: 'center',justifyContent:"space-between",display:"flex"}}>
+              <Text
+                style={{
+                  fontFamily: 'Faustina-Medium',
+                  fontSize: 18,
+                  letterSpacing: 0.5,
+                  color: "#ffffff"
+                }}>
+                {getHeaderTitle(route)}
+              </Text>
+              <Icon name="md-search-outline" color={'#ffff'} size={36} />
+            </View>
+          ),
           swipeEnabled: true,
           headerShown: true,
           drawerLabel: 'Home',
