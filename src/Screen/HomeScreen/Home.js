@@ -4,10 +4,11 @@ import {
   SafeAreaView,
   FlatList,
   ImageBackground,
+  ScrollView,
 } from 'react-native';
 import React from 'react';
 import styled from 'styled-components';
-import {TabNav} from '../../../App';
+import {LogBox} from 'react-native';
 const StyledBackground = styled.SafeAreaView`
   background-color: #f8f8f8;
   flex: 1;
@@ -77,11 +78,10 @@ const StyledTrainingItemDescription = styled.Text`
   margin-top: 10px;
   font-size: 15px;
 `;
+LogBox.ignoreLogs([
+  "VirtualizedLists should never be nested inside plain ScrollViews with the same orientation because it can break windowing and other functionality - use another VirtualizedList-backed container instead.",
+]);
 export default function Home({navigation}) {
-  navigation.setOptions({
-    headerShown: true,
-    swipeEnabled:true
-  })
   const workoutMockData = [
     {
       id: 1,
@@ -177,11 +177,12 @@ export default function Home({navigation}) {
     },
   ];
   return (
-    // <TabNav>
+    <ScrollView>
       <StyledBackground>
         <StyledWorkoutTitle>Workout Exercises</StyledWorkoutTitle>
         <StyledWorkoutFlatList
           horizontal
+          
           data={workoutMockData}
           renderItem={({item}) => (
             <StyledWorkoutView>
@@ -197,6 +198,7 @@ export default function Home({navigation}) {
         <StyledTrainingTitle>Training Plan</StyledTrainingTitle>
         <StyledTrainingFlatList
           data={trainingMockData}
+          scrollEnabled={false}
           renderItem={({item}) => (
             <StyledTrainingView>
               <StyledTrainingImage source={item.image} />
@@ -210,6 +212,6 @@ export default function Home({navigation}) {
           keyExtractor={item => item.id}
         />
       </StyledBackground>
-    // </TabNav>
+    </ScrollView>
   );
 }
