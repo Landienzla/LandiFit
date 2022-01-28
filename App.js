@@ -14,19 +14,31 @@ import Notification from './src/Screen/NotificationsScreen/Notification';
 import Profile from './src/Screen/ProfileScreen/Profile';
 import Messages from './src/Screen/MessagesScreen/Messages';
 import {Button, Text, View, ImageBackground, Image} from 'react-native';
-import sideBarImage from './src/images/sideBar.png';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {LogBox} from 'react-native';
-import DrawerContent from './components/DrawerContent';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
+
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
 ]);
 
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
-
+function getHeaderTitle(route) {
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home';
+  switch (routeName) {
+    case 'Home':
+      return 'Home';
+    case 'Notification':
+      return 'Notifications';
+    case 'Profile':
+      return 'Profile';
+    case 'Messages':
+      return "Messages"
+  }
+}
 export function HomeTabs() {
   return (
     <Tab.Navigator
@@ -105,7 +117,11 @@ export default function App({route}) {
           },
         }}>
         <Drawer.Screen
-          options={screenOptions.allow}
+          options={({route}) => ({
+            headerTitle: getHeaderTitle(route),
+            swipeEnabled: true,
+            headerShown: true,
+          })}
           name="HomeTabs"
           component={HomeTabs}
         />

@@ -1,10 +1,11 @@
 import { View, Text } from 'react-native';
 import React from 'react';
 
-export default function Notification() {
+export default function Notification({route,navigation}) {
+
   return (
     <View>
-      <Text></Text>
+      <Text>{console.log(route.name)}</Text>
     </View>
   );
 }
