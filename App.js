@@ -24,7 +24,7 @@ import About from './src/Screen/AboutScreen/About';
 import Exercises from './src/Screen/ExercisesScreen/Exercises';
 import Contact from './src/Screen/ContactScreen/Contact';
 import More from './src/Screen/MoreScreen/More';
-
+import DrawerContent from './components/DrawerContent'
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
 ]);
@@ -97,7 +97,7 @@ function HomeTabs() {
 function HomeStack() {
   return (
     <Drawer.Navigator
-      // drawerContent={props => <DrawerContent {...props} />}
+      drawerContent={props => <DrawerContent {...props} />}
       initialRouteName={'Splash1'}
       screenOptions={{
         drawerInactiveBackgroundColor: '#FFFFFF',
@@ -119,21 +119,32 @@ function HomeStack() {
           fontFamily: 'Faustina-Medium',
           textAlign: 'center',
         },
+        headerBackgroundContainerStyle: {
+          display: 'flex',
+        },
       }}>
       <Drawer.Screen
         options={({route}) => ({
+           // TODO Update Title's styling => doesn't work well 
           headerTitle: props => (
-            <View style={{flex: 0, flexDirection: 'row', alignItems: 'center',justifyContent:"space-between",display:"flex"}}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Text
                 style={{
                   fontFamily: 'Faustina-Medium',
                   fontSize: 18,
                   letterSpacing: 0.5,
-                  color: "#ffffff"
+                  color: '#ffffff',
+                  marginLeft: -25,
+                  marginTop: -3,
                 }}>
                 {getHeaderTitle(route)}
               </Text>
-              <Icon name="md-search-outline" color={'#ffff'} size={36} />
+              <Icon
+                name="md-search-outline"
+                style={{left: 270}}
+                color={'#ffff'}
+                size={36}
+              />
             </View>
           ),
           swipeEnabled: true,
@@ -155,7 +166,7 @@ export default function App({route}) {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{headerShown: false}}
-        initialRouteName="Splash1">
+        initialRouteName="HomeStack">
         <Stack.Screen name="Splash1" component={Splash1} />
         <Stack.Screen name="Sign" component={Sign} />
         <Stack.Screen name="SignUp" component={SignUp} />
@@ -167,13 +178,3 @@ export default function App({route}) {
     </NavigationContainer>
   );
 }
-const screenOptions = {
-  prevent: {
-    swipeEnabled: false,
-    headerShown: false,
-  },
-  allow: {
-    swipeEnabled: true,
-    headerShown: true,
-  },
-};

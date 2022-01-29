@@ -19,8 +19,8 @@ const StyledMessageBox = styled.View`
   margin-top: 15px;
 `;
 const StyledUserImage = styled.Image`
-  border: 1px solid #cecece;
-  border-radius: 30px;
+  /* border: 1px solid #cecece; */
+  border-radius: 30px; 
   width: 50px;
   height: 50px;
   background-color: #fefefe;

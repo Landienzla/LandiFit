@@ -1,21 +1,52 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
 import React from 'react';
-// import Splash1 from '.././src/Screen/SplashScreen/Splash1';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-// const Drawer = createDrawerNavigator();
+import styled from 'styled-components';
+const StyledView = styled.View`
+  height: 250px;
+`;
+const StyledUserImage = styled.Image`
+  /* background-color: #777777; */
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 54px;
+`;
+const StyledUserName = styled.Text`
+  margin-left: auto;
+  margin-right: auto;
+  color: #ffffff;
+  font-family: Faustina-Medium;
+  font-size: 30px;
+`;
+const Line = styled.View`
+  width: 250px;
+  border: 1px solid #ffffff;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
+`;
 export default function DrawerContent(props, {navigation}) {
   return (
     <DrawerContentScrollView {...props}>
-      <TouchableOpacity onPress={() => props.navigation.navigate('Splash1')}>
-        <Text>Splash1</Text>
-      </TouchableOpacity>
+      <StyledView>
+        <StyledUserImage
+          source={{
+            uri: 'https://cocukgelisimiok2020.digicon.ist/wp-content/themes/cera/assets/images/avatars/user-avatar.png',
+          }}></StyledUserImage>
+        <StyledUserName onPress={() => navigation.navigate('Profile')}>
+          User Name
+        </StyledUserName>
+        <Line />
+      </StyledView>
       <DrawerItemList {...props} />
-      {/* <Drawer.Screen name="Splash1" component={Splash1} /> */}
+      {/* TODO Update Drawer Items according to figma design */}
     </DrawerContentScrollView>
   );
 }
