@@ -71,7 +71,6 @@ export default function Sign({navigation}) {
       source={BackgroundImage}
       style={{flex: 1, resizeMode: 'cover', backgroundColor: 'transparent'}}>
       <View>
-        <Text onPress={() => navigation.navigate('Splash1')}>Go Back</Text>
         <StyledTitle>LandiFit</StyledTitle>
         {/* <View style={styles.line}></View> */}
         <Line/>

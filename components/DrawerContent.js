@@ -32,7 +32,7 @@ const Line = styled.View`
   margin-right: auto;
   margin-top: 25px;
 `;
-export default function DrawerContent(props, {navigation}) {
+export default function DrawerContent(props) {
   return (
     <DrawerContentScrollView {...props}>
       <StyledView>
@@ -40,13 +40,16 @@ export default function DrawerContent(props, {navigation}) {
           source={{
             uri: 'https://cocukgelisimiok2020.digicon.ist/wp-content/themes/cera/assets/images/avatars/user-avatar.png',
           }}></StyledUserImage>
-        <StyledUserName onPress={() => navigation.navigate('Profile')}>
+        <StyledUserName onPress={() => props.navigation.navigate('Profile')}>
           User Name
         </StyledUserName>
         <Line />
       </StyledView>
       <DrawerItemList {...props} />
-      {/* TODO Update Drawer Items according to figma design */}
+      {/* 
+      TODO Update Drawer Items according to figma design
+      TODO Logout Button 
+      */}
     </DrawerContentScrollView>
   );
 }

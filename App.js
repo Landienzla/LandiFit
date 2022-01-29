@@ -125,7 +125,7 @@ function HomeStack() {
       }}>
       <Drawer.Screen
         options={({route}) => ({
-           // TODO Update Title's styling => doesn't work well 
+           // FIXME Update Title's styling => doesn't work well 
           headerTitle: props => (
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Text
@@ -166,7 +166,7 @@ export default function App({route}) {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{headerShown: false}}
-        initialRouteName="HomeStack">
+        initialRouteName="Splash1">
         <Stack.Screen name="Splash1" component={Splash1} />
         <Stack.Screen name="Sign" component={Sign} />
         <Stack.Screen name="SignUp" component={SignUp} />

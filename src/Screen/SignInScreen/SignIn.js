@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
+import Icon from 'react-native-vector-icons/AntDesign';
 const StyledBackground = styled.SafeAreaView`
   background-color: #f8f8f8;
   flex: 1;
@@ -150,12 +151,24 @@ export default function SignIn({navigation}) {
         </StyledButton>
         <StyledOrText>OR</StyledOrText>
         <StyledSocialMediaButton
-          style={{left: 100, backgroundColor: '#dedede'}}
-        />
+          style={{left: 100, backgroundColor: '#dedede'}}>
+          <Icon
+            name="google"
+            color={'#ffffff'}
+            size={36}
+            style={{marginTop: 5}}
+          />
+        </StyledSocialMediaButton>
         <StyledSocialMediaButton
-          style={{left: 220, backgroundColor: '#00A4F9'}}
-        />
-        <StyledSignupText onPress={()=>navigation.navigate('SignUp')}>
+          style={{left: 220, backgroundColor: '#00A4F9'}}>
+          <Icon
+            name="twitter"
+            color={'white'}
+            size={36}
+            style={{marginTop: 5}}
+          />
+        </StyledSocialMediaButton>
+        <StyledSignupText onPress={() => navigation.navigate('SignUp')}>
           Don't have an account?
           <StyledRedSignupText>Signup</StyledRedSignupText>
         </StyledSignupText>
