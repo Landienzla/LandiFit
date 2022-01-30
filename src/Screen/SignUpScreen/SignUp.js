@@ -12,6 +12,7 @@ import CheckBox from '@react-native-community/checkbox';
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/AntDesign';
+import auth from '@react-native-firebase/auth';
 const StyledBackground = styled.SafeAreaView`
   background-color: #f8f8f8;
   flex: 1;
@@ -120,6 +121,24 @@ const StyledRedSignupText = styled.Text`
   font-family: Faustina-Medium;
 `;
 export default function SignUp({navigation}) {
+  const [userName,setUserName] = useState();
+  const [email,setEmail] = useState();
+  const [password,setPassword] = useState()
+  async function FirebaseSignUp(){
+    auth().createUserWithEmailAndPassword(email,password).then(()=>{
+      navigation.navigate("Genders")
+    }).catch((err)=>{
+      if (err.code === 'auth/email-already-in-use') {
+        console.log('That email address is already in use!');
+      }
+  
+      if (err.code === 'auth/invalid-email') {
+        console.log('That email address is invalid!');
+      }
+  
+      console.error(err);
+    })
+  }
   return (
     <StyledBackground>
       <KeyboardAvoidingView style={{flex: 1}} behavior="position">
@@ -135,6 +154,7 @@ export default function SignUp({navigation}) {
           placeholderTextColor={'#777777'}
           placeholder="Username*"
           style={{top: 220}}
+          onChangeText={(text)=>setUserName(text)}
         />
         <StyledTextInput
           keyboardType={'email-address'}
@@ -143,6 +163,7 @@ export default function SignUp({navigation}) {
           placeholderTextColor={'#777777'}
           placeholder="Email Id*"
           style={{top: 280}}
+          onChangeText={(text)=>setEmail(text)}
         />
         <StyledTextInput
           secureTextEntry={true}
@@ -151,8 +172,10 @@ export default function SignUp({navigation}) {
           placeholderTextColor={'#777777'}
           placeholder="Password*"
           style={{top: 340}}
+          onChangeText={(text)=>setPassword(text)}
         />
         <StyledCheckBoxView>
+           {/* TODO add functionality to checkbox */}
           <CheckBox />
         </StyledCheckBoxView>
 
@@ -160,7 +183,8 @@ export default function SignUp({navigation}) {
           I Read and agree to{' '}
           <StyledTermsText>Terms & Conditions</StyledTermsText>
         </StyledReadAgreeText>
-        <StyledButton onPress={() => navigation.navigate('Genders')}>
+        {/* <StyledButton onPress={() => navigation.navigate('Genders')}> */}
+        <StyledButton onPress={()=>FirebaseSignUp()}>
           <StyledLoginText>SIGNUP</StyledLoginText>
         </StyledButton>
         <StyledOrText>OR</StyledOrText>
