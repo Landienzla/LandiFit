@@ -132,20 +132,21 @@ function HomeStack() {
               <Text
                 style={{
                   fontFamily: 'Faustina-Medium',
+                  margin:"auto",
                   fontSize: 18,
                   letterSpacing: 0.5,
                   color: '#ffffff',
-                  marginLeft: -25,
-                  marginTop: -3,
+                  // marginLeft: -25,
+                  // marginTop: -3,
                 }}>
                 {getHeaderTitle(route)}
               </Text>
-              <Icon
+              {/* <Icon
                 name="md-search-outline"
                 style={{left: 270}}
                 color={'#ffff'}
                 size={36}
-              />
+              /> */}
             </View>
           ),
           swipeEnabled: true,
@@ -178,7 +179,7 @@ export default function App({route}) {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{headerShown: false}}
-        initialRouteName="Splash1">
+        initialRouteName="Profile">
         {user ? (
           <>
             <Stack.Screen name="HomeStack" component={HomeStack} />

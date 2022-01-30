@@ -33,6 +33,16 @@ const Line = styled.View`
   margin-right: auto;
   margin-top: 25px;
 `;
+const StyledLogoutButton = styled.TouchableOpacity`
+margin: auto;
+margin-top: 85px;
+`
+const StyledLogoutText = styled.Text`
+color: white;
+font-family: Faustina-Medium;
+font-size: 20px;
+
+`
 export default function DrawerContent(props) {
   return (
     <DrawerContentScrollView {...props}>
@@ -51,13 +61,13 @@ export default function DrawerContent(props) {
       TODO Update Drawer Items according to figma design
       TODO Logout Button 
       */}
-      <TouchableOpacity
+      <StyledLogoutButton
         onPress={() => {
           auth()
             .signOut()
             .then(() => console.log("Logged Out"));
         }}
-      ><Text>Logout</Text></TouchableOpacity>
+      ><StyledLogoutText>Logout</StyledLogoutText></StyledLogoutButton>
     </DrawerContentScrollView>
   );
 }
