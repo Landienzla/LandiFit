@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 import 'react-native-gesture-handler';
 
@@ -24,7 +24,8 @@ import About from './src/Screen/AboutScreen/About';
 import Exercises from './src/Screen/ExercisesScreen/Exercises';
 import Contact from './src/Screen/ContactScreen/Contact';
 import More from './src/Screen/MoreScreen/More';
-import DrawerContent from './components/DrawerContent'
+import DrawerContent from './components/DrawerContent';
+import auth from '@react-native-firebase/auth';
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
 ]);
@@ -125,7 +126,7 @@ function HomeStack() {
       }}>
       <Drawer.Screen
         options={({route}) => ({
-           // FIXME Update Title's styling => doesn't work well 
+          // FIXME Update Title's styling => doesn't work well
           headerTitle: props => (
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Text
@@ -162,18 +163,36 @@ function HomeStack() {
   );
 }
 export default function App({route}) {
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+  function onAuthStateChanged(user) {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+  if (initializing) return null;
   return (
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{headerShown: false}}
         initialRouteName="Splash1">
-        <Stack.Screen name="Splash1" component={Splash1} />
-        <Stack.Screen name="Sign" component={Sign} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="SignIn" component={SignIn} />
-        <Stack.Screen name="Genders" component={Genders} />
-        <Stack.Screen name="Focus" component={Focus} />
-        <Stack.Screen name="HomeStack" component={HomeStack} />
+        {user ? (
+          <>
+            <Stack.Screen name="HomeStack" component={HomeStack} />
+            <Stack.Screen name="Genders" component={Genders} />
+            <Stack.Screen name="Focus" component={Focus} />
+          </>
+        ) : (
+          <>
+            <Stack.Screen name="Splash1" component={Splash1} />
+            <Stack.Screen name="Sign" component={Sign} />
+            <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name="SignIn" component={SignIn} />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

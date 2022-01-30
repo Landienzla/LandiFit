@@ -13,6 +13,10 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/AntDesign';
 import auth from '@react-native-firebase/auth';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+GoogleSignin.configure({
+  webClientId: '1042897422571-lkv2h9s23nnpvcfuvijk6vk3ahj4tasb.apps.googleusercontent.com',
+});
 const StyledBackground = styled.SafeAreaView`
   background-color: #f8f8f8;
   flex: 1;
@@ -139,6 +143,11 @@ export default function SignUp({navigation}) {
       console.error(err);
     })
   }
+  async function SingUpwithGoogle() {
+    const { idToken } = await GoogleSignin.signIn();
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+    return auth().signInWithCredential(googleCredential);
+  }
   return (
     <StyledBackground>
       <KeyboardAvoidingView style={{flex: 1}} behavior="position">
@@ -189,6 +198,9 @@ export default function SignUp({navigation}) {
         </StyledButton>
         <StyledOrText>OR</StyledOrText>
         <StyledSocialMediaButton
+        onPress={()=>{
+          SingUpwithGoogle().then(()=>alert("31")).catch(err=>console.error(err))
+        }}
           style={{
             left: 100,
             backgroundColor: '#dedede',

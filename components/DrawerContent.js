@@ -6,6 +6,7 @@ import {
 } from '@react-navigation/drawer';
 import React from 'react';
 import styled from 'styled-components';
+import auth from '@react-native-firebase/auth';
 const StyledView = styled.View`
   height: 250px;
 `;
@@ -50,6 +51,13 @@ export default function DrawerContent(props) {
       TODO Update Drawer Items according to figma design
       TODO Logout Button 
       */}
+      <TouchableOpacity
+        onPress={() => {
+          auth()
+            .signOut()
+            .then(() => console.log("Logged Out"));
+        }}
+      ><Text>Logout</Text></TouchableOpacity>
     </DrawerContentScrollView>
   );
 }

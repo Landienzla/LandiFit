@@ -11,6 +11,11 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/AntDesign';
 import auth from '@react-native-firebase/auth';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+GoogleSignin.configure({
+  webClientId:
+    '1042897422571-lkv2h9s23nnpvcfuvijk6vk3ahj4tasb.apps.googleusercontent.com',
+});
 const StyledBackground = styled.SafeAreaView`
   background-color: #f8f8f8;
   flex: 1;
@@ -121,10 +126,15 @@ const StyledRedSignupText = styled.Text`
   font-family: Faustina-Medium;
 `;
 export default function SignIn({navigation}) {
-  const [email,setEmail] = useState();
-  const [password,setPassword] = useState();
-  async function FirebaseSignIn(){
-    auth().signInWithEmailAndPassword(email,password)
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  async function FirebaseSignIn() {
+    auth().signInWithEmailAndPassword(email, password);
+  }
+  async function SingUpwithGoogle() {
+    const {idToken} = await GoogleSignin.signIn();
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+    return auth().signInWithCredential(googleCredential);
   }
   return (
     <StyledBackground>
@@ -142,7 +152,7 @@ export default function SignIn({navigation}) {
           placeholderTextColor={'#777777'}
           placeholder="Email Id*"
           style={{top: 280}}
-          onChangeText = {(text)=>setEmail(text)}
+          onChangeText={text => setEmail(text)}
         />
         <StyledTextInput
           secureTextEntry={true}
@@ -151,14 +161,19 @@ export default function SignIn({navigation}) {
           placeholderTextColor={'#777777'}
           placeholder="Password*"
           style={{top: 340}}
-          onChangeText = {(text)=>setPassword(text)}
+          onChangeText={text => setPassword(text)}
         />
         <StyledForgotPasswordText>Forgot Password?</StyledForgotPasswordText>
-        <StyledButton onPress={() => navigation.navigate('HomeStack')}>
+        <StyledButton onPress={() => FirebaseSignIn()}>
           <StyledLoginText>LOGIN</StyledLoginText>
         </StyledButton>
         <StyledOrText>OR</StyledOrText>
         <StyledSocialMediaButton
+          onPress={() => {
+            SingUpwithGoogle()
+              .then(() => alert('31'))
+              .catch(err => console.error(err));
+          }}
           style={{left: 100, backgroundColor: '#dedede'}}>
           <Icon
             name="google"
