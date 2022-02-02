@@ -13,9 +13,11 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/AntDesign';
 import auth from '@react-native-firebase/auth';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import firestore from '@react-native-firebase/firestore';
 GoogleSignin.configure({
-  webClientId: '1042897422571-lkv2h9s23nnpvcfuvijk6vk3ahj4tasb.apps.googleusercontent.com',
+  webClientId:
+    '1042897422571-lkv2h9s23nnpvcfuvijk6vk3ahj4tasb.apps.googleusercontent.com',
 });
 const StyledBackground = styled.SafeAreaView`
   background-color: #f8f8f8;
@@ -124,27 +126,54 @@ const StyledRedSignupText = styled.Text`
   color: #c12323;
   font-family: Faustina-Medium;
 `;
-export default function SignUp({navigation}) {
-  const [userName,setUserName] = useState();
-  const [email,setEmail] = useState();
-  const [password,setPassword] = useState()
-  async function FirebaseSignUp(){
-    auth().createUserWithEmailAndPassword(email,password).then(()=>{
-      navigation.navigate("Genders")
-    }).catch((err)=>{
-      if (err.code === 'auth/email-already-in-use') {
-        console.log('That email address is already in use!');
+function CreateUser(userName, mail, photoURL) {
+  firestore()
+    .collection('Users')
+    .where('email', 'in', [mail])
+    .get()
+    .then(resp => {
+      if (resp.exists) {
+        alert('user exists');
+      } else {
+        firestore()
+          .collection('Users')
+          .add({
+            userName: userName,
+            email: mail,
+            photoURL: photoURL,
+          })
+          .then(() => {
+            navigation.navigate('Genders');
+          });
       }
-  
-      if (err.code === 'auth/invalid-email') {
-        console.log('That email address is invalid!');
-      }
-  
-      console.error(err);
     })
+    .catch(err => console.log(err));
+}
+export default function SignUp({navigation}) {
+  const [userName, setUserName] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
+  async function FirebaseSignUp() {
+    auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        CreateUser(userName, email, password);
+      })
+      .catch(err => {
+        if (err.code === 'auth/email-already-in-use') {
+          console.log('That email address is already in use!');
+        }
+
+        if (err.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+        }
+
+        console.error(err);
+      });
   }
   async function SingUpwithGoogle() {
-    const { idToken } = await GoogleSignin.signIn();
+    const {idToken} = await GoogleSignin.signIn();
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
     return auth().signInWithCredential(googleCredential);
   }
@@ -163,7 +192,7 @@ export default function SignUp({navigation}) {
           placeholderTextColor={'#777777'}
           placeholder="Username*"
           style={{top: 220}}
-          onChangeText={(text)=>setUserName(text)}
+          onChangeText={text => setUserName(text)}
         />
         <StyledTextInput
           keyboardType={'email-address'}
@@ -172,7 +201,7 @@ export default function SignUp({navigation}) {
           placeholderTextColor={'#777777'}
           placeholder="Email Id*"
           style={{top: 280}}
-          onChangeText={(text)=>setEmail(text)}
+          onChangeText={text => setEmail(text)}
         />
         <StyledTextInput
           secureTextEntry={true}
@@ -181,10 +210,10 @@ export default function SignUp({navigation}) {
           placeholderTextColor={'#777777'}
           placeholder="Password*"
           style={{top: 340}}
-          onChangeText={(text)=>setPassword(text)}
+          onChangeText={text => setPassword(text)}
         />
         <StyledCheckBoxView>
-           {/* TODO add functionality to checkbox */}
+          {/* TODO add functionality to checkbox */}
           <CheckBox />
         </StyledCheckBoxView>
 
@@ -193,14 +222,24 @@ export default function SignUp({navigation}) {
           <StyledTermsText>Terms & Conditions</StyledTermsText>
         </StyledReadAgreeText>
         {/* <StyledButton onPress={() => navigation.navigate('Genders')}> */}
-        <StyledButton onPress={()=>FirebaseSignUp()}>
+        <StyledButton onPress={() => FirebaseSignUp()}>
           <StyledLoginText>SIGNUP</StyledLoginText>
         </StyledButton>
         <StyledOrText>OR</StyledOrText>
         <StyledSocialMediaButton
-        onPress={()=>{
-          SingUpwithGoogle().then(()=>alert("31")).catch(err=>console.error(err))
-        }}
+          onPress={() => {
+            SingUpwithGoogle()
+              .then(() => {
+                GoogleSignin.getCurrentUser().then(resp => {
+                  CreateUser(
+                    resp.user.name,
+                    resp.user.email,
+                    resp.user.photoURL,
+                  );
+                });
+              })
+              .catch(err => console.error(err));
+          }}
           style={{
             left: 100,
             backgroundColor: '#dedede',
