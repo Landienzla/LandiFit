@@ -14,7 +14,7 @@ import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/AntDesign';
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import firestore from '@react-native-firebase/firestore';
+import axios from 'axios';
 GoogleSignin.configure({
   webClientId:
     '1042897422571-lkv2h9s23nnpvcfuvijk6vk3ahj4tasb.apps.googleusercontent.com',
@@ -126,28 +126,19 @@ const StyledRedSignupText = styled.Text`
   color: #c12323;
   font-family: Faustina-Medium;
 `;
-function CreateUser(userName, mail, photoURL) {
-  firestore()
-    .collection('Users')
-    .where('email', 'in', [mail])
-    .get()
+async function CreateUser(username, email, ...props) {
+  axios
+    .post(
+      `http://10.0.2.2:5000/users/create?username=${username}&email=${email}`,
+    )
     .then(resp => {
-      if (resp.exists) {
-        alert('user exists');
-      } else {
-        firestore()
-          .collection('Users')
-          .add({
-            userName: userName,
-            email: mail,
-            photoURL: photoURL,
-          })
-          .then(() => {
-            navigation.navigate('Genders');
-          });
+      if (resp.status === 200) {
+        props.navigation.navigate('Genders');
+      } else if (resp.status === 231) {
+        alert('User Exists');
+        props.navigation.navigate('SignIn');
       }
-    })
-    .catch(err => console.log(err));
+    }).catch(err=>console.log(err));
 }
 export default function SignUp({navigation}) {
   const [userName, setUserName] = useState();
@@ -158,7 +149,7 @@ export default function SignUp({navigation}) {
     auth()
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
-        CreateUser(userName, email, password);
+        CreateUser(userName, email);
       })
       .catch(err => {
         if (err.code === 'auth/email-already-in-use') {
@@ -231,11 +222,12 @@ export default function SignUp({navigation}) {
             SingUpwithGoogle()
               .then(() => {
                 GoogleSignin.getCurrentUser().then(resp => {
-                  CreateUser(
-                    resp.user.name,
-                    resp.user.email,
-                    resp.user.photoURL,
-                  );
+                  // CreateUser(
+                  //   resp.user.name,
+                  //   resp.user.email,
+                  //   resp.user.photoURL,
+                  // );
+                  navigation.navigate('Genders');
                 });
               })
               .catch(err => console.error(err));
