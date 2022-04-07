@@ -13,7 +13,14 @@ import Home from './src/Screen/HomeScreen/Home';
 import Notification from './src/Screen/NotificationsScreen/Notification';
 import Profile from './src/Screen/ProfileScreen/Profile';
 import Messages from './src/Screen/MessagesScreen/Messages';
-import {Button, Text, View, ImageBackground, Image} from 'react-native';
+import {
+  Button,
+  Text,
+  View,
+  ImageBackground,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -26,6 +33,7 @@ import Contact from './src/Screen/ContactScreen/Contact';
 import More from './src/Screen/MoreScreen/More';
 import DrawerContent from './components/DrawerContent';
 import auth from '@react-native-firebase/auth';
+import Settings from './src/Screen/SettingsScreen/Settings';
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
 ]);
@@ -132,7 +140,7 @@ function HomeStack() {
               <Text
                 style={{
                   fontFamily: 'Faustina-Medium',
-                  margin:"auto",
+                  margin: 'auto',
                   fontSize: 18,
                   letterSpacing: 0.5,
                   color: '#ffffff',
@@ -141,12 +149,15 @@ function HomeStack() {
                 }}>
                 {getHeaderTitle(route)}
               </Text>
-              {/* <Icon
-                name="md-search-outline"
-                style={{left: 270}}
-                color={'#ffff'}
-                size={36}
-              /> */}
+              {/* <TouchableOpacity style={{}}>
+                <Icon
+                  // name="md-search-outline"
+                  // name="settings-outline"
+                  name="md-settings-outline"
+                  color={'#000'}
+                  size={36}
+                />
+              </TouchableOpacity> */}
             </View>
           ),
           swipeEnabled: true,
@@ -160,6 +171,7 @@ function HomeStack() {
       <Drawer.Screen name="Exercises" component={Exercises} />
       <Drawer.Screen name="Contact" component={Contact} />
       <Drawer.Screen name="More" component={More} />
+      <Drawer.Screen name="Settings" component={Settings} />
     </Drawer.Navigator>
   );
 }

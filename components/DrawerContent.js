@@ -7,6 +7,8 @@ import {
 import React from 'react';
 import styled from 'styled-components';
 import auth from '@react-native-firebase/auth';
+import Icon from 'react-native-vector-icons/Ionicons';
+
 const StyledView = styled.View`
   height: 250px;
 `;
@@ -34,19 +36,29 @@ const Line = styled.View`
   margin-top: 25px;
 `;
 const StyledLogoutButton = styled.TouchableOpacity`
-margin: auto;
-margin-top: 85px;
-`
+  margin: auto;
+  margin-top: 85px;
+`;
 const StyledLogoutText = styled.Text`
-color: white;
-font-family: Faustina-Medium;
-font-size: 20px;
-
-`
+  color: white;
+  font-family: Faustina-Medium;
+  font-size: 20px;
+`;
 export default function DrawerContent(props) {
   return (
     <DrawerContentScrollView {...props}>
       <StyledView>
+        <TouchableOpacity
+          style={{alignSelf: 'flex-end', marginRight: 2}}
+          onPress={() => props.navigation.navigate('Settings')}>
+          <Icon
+            // name="md-search-outline"
+            // name="settings-outline"
+            name="md-settings-outline"
+            color={'#ffffff'}
+            size={36}
+          />
+        </TouchableOpacity>
         <StyledUserImage
           source={{
             uri: 'https://cocukgelisimiok2020.digicon.ist/wp-content/themes/cera/assets/images/avatars/user-avatar.png',
@@ -65,9 +77,10 @@ export default function DrawerContent(props) {
         onPress={() => {
           auth()
             .signOut()
-            .then(() => console.log("Logged Out"));
-        }}
-      ><StyledLogoutText>Logout</StyledLogoutText></StyledLogoutButton>
+            .then(() => console.log('Logged Out'));
+        }}>
+        <StyledLogoutText>Logout</StyledLogoutText>
+      </StyledLogoutButton>
     </DrawerContentScrollView>
   );
 }
